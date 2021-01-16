@@ -17,10 +17,12 @@ public class HandleEffect : MonoBehaviour
     
     public GameObject SystemManager;
     private GroupHandler groupHandler;
+    private GameObject allyTarget;
 
     void Awake()
     {
         SystemManager = GameObject.FindGameObjectWithTag("SystemManager");
+        allyTarget = GameObject.Find("Pos01");
     }
 
     void Start()
@@ -34,6 +36,7 @@ public class HandleEffect : MonoBehaviour
         {
             volume.weight -= 0.20f;
             groupHandler.qtdBirds += 1;
+            ally.transform.position = allyTarget.transform.position;
             ally.SetActive(true);
             soundDestroy.GetComponent<AudioSource>().Play();
             radio.GetComponent<AudioSource>().volume += (0.05F * groupHandler.qtdBirds);
