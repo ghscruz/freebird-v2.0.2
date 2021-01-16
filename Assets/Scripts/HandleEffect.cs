@@ -14,11 +14,18 @@ public class HandleEffect : MonoBehaviour
     public GameObject nature;
     public GameObject trigger;
     public GameObject soundDestroy;
-    private flight birds;
+    
+    public GameObject SystemManager;
+    private GroupHandler groupHandler;
+
+    void Awake()
+    {
+        SystemManager = GameObject.FindGameObjectWithTag("SystemManager");
+    }
 
     void Start()
     {
-        birds = player.GetComponent<flight>();
+        groupHandler = SystemManager.transform.Find("GroupManager").GetComponent<GroupHandler>();
     }
 
     private void OnTriggerEnter(Collider other)
@@ -26,11 +33,11 @@ public class HandleEffect : MonoBehaviour
         if(other.tag == "Player")
         {
             volume.weight -= 0.20f;
-            birds.qtdBirds += 1;
+            groupHandler.qtdBirds += 1;
             ally.SetActive(true);
             soundDestroy.GetComponent<AudioSource>().Play();
-            radio.GetComponent<AudioSource>().volume += (0.05F * birds.qtdBirds);
-            nature.GetComponent<AudioSource>().volume += (0.1f * birds.qtdBirds);
+            radio.GetComponent<AudioSource>().volume += (0.05F * groupHandler.qtdBirds);
+            nature.GetComponent<AudioSource>().volume += (0.1f * groupHandler.qtdBirds);
             trigger.SetActive(false);
         }
     }

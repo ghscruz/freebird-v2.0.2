@@ -12,8 +12,6 @@ public class flight : MonoBehaviour
     public float speedUp;
     public float speedBoost;
     public GameObject songBoost;
-    public int qtdBirds = 0;
-    public GameObject resetar;
 
     private Animator anim;
     // Start is called before the first frame update
@@ -62,11 +60,6 @@ public class flight : MonoBehaviour
         else if (rotation < 0)
         {
             transform.Rotate(0, 0, 2f);
-        }
-
-        if(qtdBirds == 4)
-        {
-            resetar.SetActive(true); 
         }
     }
 }
