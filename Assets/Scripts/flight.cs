@@ -35,10 +35,6 @@ public class flight : MonoBehaviour
         rotation *= Time.deltaTime;
         sobe *= Time.deltaTime;
 
-    // Debug.Log(staminaBar.instance.getStamina());
-
-        // if(boost > 0 && staminaBar.instance.currentStamina > 15)
-        // if(boost > 0)
         if(boost > 0 && staminaBar.instance.getStamina() > 0)
         {
             songBoost.GetComponent<AudioSource>().volume = 1.0F;
@@ -50,16 +46,16 @@ public class flight : MonoBehaviour
             songBoost.GetComponent<AudioSource>().volume = 0.0F;
             transform.Translate(0, 0, translation);
         }
-        
-        transform.Rotate(sobe, rotation, 0);
+
+         transform.Rotate(sobe, 0, rotation);
 
         if (rotation > 0)
         {
-            transform.Rotate(0, 0, -2f);
+            transform.Rotate(0, 0, -3.5f);
         }
         else if (rotation < 0)
         {
-            transform.Rotate(0, 0, 2f);
+            transform.Rotate(0, 0, 3.5f);
         }
     }
 }
