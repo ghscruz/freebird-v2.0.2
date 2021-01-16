@@ -20,6 +20,7 @@ public class StartScript : MonoBehaviour
     public string comandos = "sceneComandos";
     public string voltar = "Main";
     public string creditos = "creditos";
+    private Scene currentScene;
 
     private Boolean started = false;
 
@@ -32,13 +33,18 @@ public class StartScript : MonoBehaviour
         bird.GetComponent<flight>().enabled = true;
         camera.GetComponent<SmoothCamera>().enabled = true;
         canvas.enabled = false;
+        currentScene = SceneManager.GetActiveScene();
     }
 
     void Update()
     {
-        if(started)canvas.GetComponent<AudioSource>().volume -= 0.0005f;
-        if (canvas.GetComponent<AudioSource>().volume == 0f) {
-            canvas.GetComponent<AudioSource>().enabled = false;
+        if(currentScene.name == "Main")
+        {
+            if (started) canvas.GetComponent<AudioSource>().volume -= 0.0005f;
+            if (canvas.GetComponent<AudioSource>().volume == 0f)
+            {
+                canvas.GetComponent<AudioSource>().enabled = false;
+            }
         }
     }
 

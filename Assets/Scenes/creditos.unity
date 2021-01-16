@@ -644,7 +644,7 @@ MonoBehaviour:
   effect: {fileID: 0}
   turnE: {fileID: 0}
   turnD: {fileID: 0}
-  canvas: {fileID: 0}
+  canvas: {fileID: 999602293}
   radio: {fileID: 0}
   nature: {fileID: 0}
   qtdBirds: 0
