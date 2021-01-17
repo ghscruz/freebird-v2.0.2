@@ -3,20 +3,16 @@ using UnityEngine;
 
 public class Ally : MonoBehaviour
 {
-    public Transform transform;
-    //public Transform target;
+
     public float followSpeed = 5;
     public float rotateSpeed = 0.35f;
-    //public Rigidbody rb;
-    private Animator anim;
-
     public BirdSide side;
 
+    private Transform transform;
+    private Rigidbody rb;
+    private Animator anim;
     private GameObject bird;
-
     private GameObject target;
-
-
 
     float getAnimTime(string animationName) {
         RuntimeAnimatorController ac = anim.runtimeAnimatorController;    //Get Animator controller
@@ -49,10 +45,10 @@ public class Ally : MonoBehaviour
 
     void Awake ()
     {
-        target = GameObject.Find("Pos01");
-        bird = GameObject.Find("Bird");
+        target = GameObject.Find("Pos1");
+        bird = GameObject.FindWithTag("Player");
 
-        //rb = GetComponent<Rigidbody>();
+        rb = GetComponent<Rigidbody>();
         anim = GetComponent<Animator>();
         transform = GetComponent<Transform>();
     }
@@ -69,10 +65,12 @@ public class Ally : MonoBehaviour
 
     void LateUpdate()
     {
-        transform.position = Vector3.MoveTowards(transform.position, target.transform.position, followSpeed * Time.deltaTime);
-        //Vector3 direction = (bird.transform.position - transform.position).normalized;
-        //transform.forward = direction;
-        transform.rotation = Quaternion.Slerp(transform.rotation, target.transform.rotation, Time.deltaTime/rotateSpeed);
+        //transform.position = Vector3.MoveTowards(transform.position, target.transform.position, followSpeed * Time.deltaTime);
+
+        Vector3 direction = (target.transform.position - transform.position).normalized;
+        rb.MovePosition(transform.position +  direction * followSpeed * Time.deltaTime);
+
+        transform.rotation = Quaternion.Slerp(transform.rotation, bird.transform.rotation, Time.deltaTime/rotateSpeed);
     }
 
 }

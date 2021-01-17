@@ -15,19 +15,19 @@ public class HandleEffect : MonoBehaviour
     public GameObject trigger;
     public GameObject soundDestroy;
     
-    public GameObject SystemManager;
     private GroupHandler groupHandler;
     private GameObject allyTarget;
 
+    public static Action BirdCall;
+
     void Awake()
     {
-        SystemManager = GameObject.FindGameObjectWithTag("SystemManager");
-        allyTarget = GameObject.Find("Pos01");
+        allyTarget = GameObject.Find("Pos1");
     }
 
     void Start()
     {
-        groupHandler = SystemManager.transform.Find("GroupManager").GetComponent<GroupHandler>();
+        groupHandler = GameObject.Find("GroupManager").GetComponent<GroupHandler>();
     }
 
     private void OnTriggerEnter(Collider other)
@@ -42,6 +42,8 @@ public class HandleEffect : MonoBehaviour
             radio.GetComponent<AudioSource>().volume += (0.05F * groupHandler.qtdBirds);
             nature.GetComponent<AudioSource>().volume += (0.1f * groupHandler.qtdBirds);
             trigger.SetActive(false);
+
+            BirdCall?.Invoke();
         }
     }
 }
